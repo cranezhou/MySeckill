@@ -22,7 +22,7 @@
         <!-- 关闭自动提交 -->
         <property name="autoCommitOnClose" value="false"/>
         <!-- 配置获取连接的超时时间 -->
-        <!--<property name="checkoutTimeout" value="1000"/>-->
+        <property name="checkoutTimeout" value="1000"/>
         <!-- 连接失败的重试次数 -->
         <property name="acquireRetryAttempts" value="2"/>
     </bean>
