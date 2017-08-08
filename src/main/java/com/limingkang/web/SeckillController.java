@@ -8,6 +8,8 @@ import com.limingkang.enums.SeckillStateEnum;
 import com.limingkang.exception.RepeatKillException;
 import com.limingkang.exception.SeckillCloseException;
 import com.limingkang.service.SeckillService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+@Api(value = "秒杀", description = "秒杀")
 @RequestMapping("/seckill")
 public class SeckillController {
 
@@ -27,6 +30,7 @@ public class SeckillController {
     @Autowired
     private SeckillService seckillService;
 
+    @ApiOperation(value = "秒杀列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         List<Seckill> list = seckillService.getSeckill();
@@ -34,6 +38,7 @@ public class SeckillController {
         return "list";
     }
 
+    @ApiOperation(value = "秒杀详情")
     @RequestMapping(value = "/{seckillId}/detail", method = RequestMethod.GET)
     public String detail(@PathVariable("seckillId") Long seckillId, Model model) {
         if (seckillId == null) {
@@ -47,6 +52,7 @@ public class SeckillController {
         return "detail";
     }
 
+    @ApiOperation(value = "秒杀地址")
     @RequestMapping(value = "/{seckillId}/exposer",
             method = RequestMethod.POST,
             produces = {"application/json;charset=utf-8"})
@@ -63,6 +69,7 @@ public class SeckillController {
         return result;
     }
 
+    @ApiOperation(value = "秒杀操作")
     @RequestMapping(value = "/{seckillId}/{md5}/execution",
             method = RequestMethod.POST,
             produces = {"application/json;charset=utf-8"})
@@ -91,6 +98,7 @@ public class SeckillController {
         }
     }
 
+    @ApiOperation(value = "当前时间")
     @RequestMapping(value = "/time/now",method = RequestMethod.GET)
     @ResponseBody
     public SeckillResult<Long> time(){
